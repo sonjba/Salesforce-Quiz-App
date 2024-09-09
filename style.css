@@ -1,0 +1,14 @@
+.quiz-container {
+    margin: 0 auto; /* Center the quiz container */
+    width: 80%; /* Set the width of the quiz container */
+}
+
+.answer-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.answer-container lightning-button {
+    flex-basis: 50%; /* Arrange answers in two columns */
+    margin: 5px; /* Add margin between answers */
+}

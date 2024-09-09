@@ -1,0 +1,59 @@
+<template>
+    <div class="quiz-container">
+
+    <template if:true={showStartPage}>
+        <div class="start-container">
+            <h1>Let the game begin.</h1>
+            <lightning-button label="Sure" onclick={handleStart}></lightning-button>
+        </div>
+    </template>
+
+    <template if:true={showSelectionPage}>
+        <div class="welcome-container">
+            <p>Please select the quiz and the level:</p>
+            <lightning-combobox name="quizSelection" label="Select Quiz" value={selectedQuizId} options={quizOptions} onchange={handleQuizSelection}></lightning-combobox>
+            <lightning-combobox name="difficultyLevel" label="Difficulty Level" value={selectedDifficulty} options={difficultyOptions} onchange={handleDifficultySelection}></lightning-combobox>
+            <template if:true={quizQuestions.length}>
+                <lightning-button label="Start Quiz" onclick={startQuiz}></lightning-button>
+            </template>
+        </div>
+    </template>
+
+    <template if:true={showQuestions}>
+        <div class="quiz-container">
+            <div key={currentQuestion.value}>
+                <p>{questionElement}</p>
+                <div class="answer-container">
+                    <lightning-radio-group name="answers"
+                                           options={answerOptions}
+                                           value={selectedAnswerId}
+                                           onchange={handleAnswerSelection}>
+                    </lightning-radio-group>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <lightning-button label="Previous" onclick={previousQuestion}></lightning-button>
+            <lightning-button label="Next" onclick={nextQuestion}></lightning-button>
+            <lightning-button label="Submit" onclick={submit}></lightning-button>
+        </div>
+    </template>
+
+    <template if:true={showLastPage}>
+        <div class="thankyou-container">
+            <h1>Thank you for submitting!</h1>
+            <p>Press the button below to check your result</p>
+        </div>
+        <div class="button-container">
+            <lightning-button label="Check Result" onclick={checkResult}></lightning-button>
+        </div>
+    </template>
+
+    <template if:true={showResultPage}>
+        <div class="result-container">
+            <p>Number of correct answers: {correctAnswersCount}</p>
+        </div>
+    </template>
+
+    </div>
+</template>
